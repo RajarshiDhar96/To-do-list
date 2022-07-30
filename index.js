@@ -14,5 +14,5 @@ app.listen(port,function(err)
     {
         console.log("Error in running the server:", err);
     }
-    console.log("Express server is running on the port: ", port);
+    console.log("Express server is running on the port number: ", port);
 })
