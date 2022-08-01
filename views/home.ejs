@@ -4,18 +4,83 @@
 
     </head>
     <body>
+        <!-- Heading of the app -->
         <div id="heading-box">
             <h1><%= title %></h1>
 
         </div>
+   
+        <!-- Form containing Description, Date, Category  -->
+        <form action="/create" method="POST" id="input-form">
+            <!-- Description Part -->
+            <div id="description">
+                <label for="name">Description</label><br>
+                <input type="text" name="name" placeholder="What do you need to do??" required>
 
-        <form action="/create" method="POST">
-            <input type="text" name="name" placeholder="description">
-            <input type="date" name="date" placeholder="date">
-            <input type="text" name="category" placeholder="category">
-            <button type="submit"> Add Task</button>
+            </div>
+           <div id="date-cat">
+            <!-- Date  -->
+                <label for="date">Date</label>
+                <input type="date" name="date" required >
+                
+            <!-- Drop down for Category    -->
+                    <p id="category-heading" style="font-weight:bolder; font-size: 1.2rem ;">CATEGORY</p>                   
+
+                    <!-- Category Drop-down Menu -->
+                    <select name="category" id="category-options" required>
+                        <!-- <option style="display:none"></option> -->
+                        <option value="personal">Personal</option>
+                        <option value="work">Work</option>
+                        <option value="school">School</option>
+                        <option value="cleaning">Cleaning</option>
+                        <option value="other">Other</option>
+                    </select>
+
+               
+           </div>
+           
+           
+
+        </form>
+
+        <!-- contain the Add button and Delete Button -->
+        <button id="add-button" type="submit" form="input-form"> Add Task</button>
+        <button id="delete-button" type="submit" form="delete">Delete</button>
+
+        <!-- Viewing all the Tasks -->
+        <form id="delete" action="/deleteAll" method="POST">
+
+        <div id="task-container">
+            <!-- Using the for loop to fetch the list of tasks -->
+            <% for(let i of taskList){ %>
+            <div class="task-detail-box">
+                <div id="checkbox">
+                    <input type="checkbox" name="taskId" value="<%= i._id %>">
+                </div>
+                <div id="task-name-date">
+                    <p id="task-name"><%= i.name%></p>
+                    <p id="task-date"><%= i.date%></p>
+                </div>
+
+                <div id="task-category">
+                    <p><%= i.category%></p>
+                </div>
+
+            </div>
+
+            <%}%>
+            
+        </div>
+
+
+
+
 
         </form>
         
+
+ 
+
+      
     </body>
 </html>
